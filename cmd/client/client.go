@@ -169,7 +169,7 @@ func AddUserStreamBoth(client pb.UserServiceClient) {
 			if err != nil {
 				log.Fatalf("Error receiving data: %v", err)
 			}
-			fmt.Printf("Receiving user %v with status: %v\n", res.GetUser().GetName(), res.GetStatus())
+			fmt.Printf("Receiving User %v with status: %v\n", res.GetUser().GetName(), res.GetStatus())
 		}
 		close(wait)
 	}()
