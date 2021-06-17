@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/fxsobr/exemplo-grpc/pb/pb"
@@ -17,6 +18,7 @@ func main() {
 	defer connection.Close()
 
 	client := pb.NewUserServiceClient(connection)
+	AddUser(client)
 }
 
 func AddUser(client pb.UserServiceClient) {
@@ -24,9 +26,14 @@ func AddUser(client pb.UserServiceClient) {
 	req := &pb.User{
 		Id:    "0",
 		Name:  "Marcelo Ceolin",
-		Email: "mceolin@unidavi.edu.br",
+		Email: "m@.com",
 	}
 
 	res, err := client.AddUser(context.Background(), req)
+	if err != nil {
+		log.Fatalf("Could not make gRPC request: %v", err)
+	}
+
+	fmt.Println(res)
 
 }
